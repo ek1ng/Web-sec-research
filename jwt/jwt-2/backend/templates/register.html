@@ -1,0 +1,160 @@
+<html>
+
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    /* fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+    /* reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+
+    /* styling */
+    body {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.8rem;
+      font-weight: normal;
+    }
+
+    .bg-image-container {
+      width: 100vw;
+      height: 100vh;
+      background-image: url("https://wallpaperaccess.com/full/2425075.jpg");
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background-color: hsla(40, 100%, 6%, 0.6);
+      padding: 5rem 3rem;
+      width: 50%;
+      min-width: 40rem;
+      max-width: 60rem;
+      border-radius: 1rem;
+    }
+
+    .login-container h3 {
+      font-size: 3.5rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
+
+    .input-group label {
+      color: white;
+      font-weight: 300;
+      font-size: 2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .input-group input {
+      font-size: 2rem;
+      padding: 0.1rem 0.25rem;
+      background-color: hsla(40, 100%, 91%, 0.3);
+      border: 1px solid hsl(40, 100%, 6%);
+      outline: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: lighter;
+    }
+
+    .input-group input:focus {
+      border: 1px solid hsl(40, 100%, 50%)
+    }
+
+    .login-button {
+      padding: 1rem 3rem;
+      width: 100%;
+      border-radius: 5px;
+      background-color: hsla(40, 100%, 50%, 0.1);
+      border: 1px solid hsl(40, 100%, 50%);
+      outline: none;
+      font-size: 2rem;
+      color: white;
+      font-weight: lighter;
+      margin-top: 2rem;
+      cursor: pointer;
+    }
+
+    .login-button:hover {
+      background-color: hsla(40, 100%, 50%, 0.3)
+    }
+
+    .login-button:focus {
+      background-color: hsla(40, 100%, 50%, 0.5)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-image-container">
+    <div class="login-container">
+      <h3>Welcome</h3>
+      <!-- form -->
+      <form action="" method="post">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" required>
+        </div>
+        <div class="input-group">
+          <label for="password1">Password</label>
+          <input type="password" name="password1" id="password1" required>
+        </div>
+        <div class="input-group">
+          <label for="password2">Password</label>
+          <input type="password" name="password2" id="password2" required>
+        </div>
+        <button type="button" id="button" class="login-button">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script>
+  async function login(e) {
+    e.preventDefault()
+
+    const username = document.getElementById('username').value
+    const password1 = document.getElementById('password1').value
+    const password2 = document.getElementById('password2').value
+    if (password1 !== password2) {
+      return alert("Password mismatch")
+    }
+    const uri = '/register'
+    try {
+      const res = await axios.post(uri, { username, password: password1 })
+      const token = res.data.token
+      localStorage.setItem('token', token)
+      alert("success")
+      window.location = "/"
+    } catch {
+      alert('register failed')
+    }
+  }
+
+  const button = document.getElementById("button")
+  button.addEventListener('click', login)
+
+</script>
+
+</html>

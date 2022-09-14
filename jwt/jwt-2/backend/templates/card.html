@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+    /* reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* basic color palette */
+      --black-1: hsl(0, 0%, 0%);
+      --white-1: hsl(0, 0%, 100%);
+      --white-2: hsl(0, 0%, 80%);
+      /* fonts */
+      --ft-fy-fallback-1: sans-serif;
+      --ft-fy-1: "Poppins", var(--ft-fy-fallback-1);
+      --ft-se-300: 0.95rem;
+      --ft-se-400: 1.05rem;
+      /* spaces */
+      --space-400: 2em;
+    }
+
+    /* components */
+    .page {
+      color: var(--black-1);
+      display: grid;
+      padding-block: var(--space-400);
+      min-height: 100vh;
+      grid-template-rows: 1fr;
+      grid-template-areas: "main";
+      background-color: var(--white-1);
+      font-size: var(--ft-se-400);
+      font-family: var(--ft-fy-1);
+    }
+
+    .page__main {
+      display: grid;
+      place-items: center;
+      grid-area: main;
+    }
+
+    .page__content {
+      width: calc(100% - var(--space-400));
+      max-width: 600px;
+    }
+
+    .content {
+      /* for all children */
+      --br-cr: var(--white-2);
+      --br-wh: 4px;
+      --bd-cr: var(--white-2);
+      --pg-in: 25px;
+      /* __title */
+      --__title_pg-bk: 0.5em;
+      /* __desc */
+      --__desc_pg-bk: 1em;
+    }
+
+    .content__text-block {
+      border: var(--br-wh) solid var(--br-cr);
+    }
+
+    .content__title {
+      padding-block: var(--__title_pg-bk);
+      padding-inline: var(--pg-in);
+      background-color: var(--bd-cr);
+    }
+
+    .content__desc {
+      padding-block: var(--__desc_pg-bk);
+      padding-inline: var(--pg-in);
+    }
+
+    .content__desc[data-is-hidden-content=true]::after {
+      position: absolute;
+      content: "...";
+    }
+
+    .content__desc[data-is-hidden-content=false]::after {
+      position: absolute;
+      content: "";
+    }
+
+    .content__hidden-content {
+      display: none;
+    }
+
+    .content__hidden-content_show {
+      display: inline;
+    }
+
+    .content__button {
+      margin-top: -4px;
+    }
+
+    .primary-button {
+      border: var(--br-wh, 4px) solid var(--br-cr, var(--white-2));
+      cursor: pointer;
+      padding-block: 0.7em;
+      padding-inline: var(--pg-in, 1.5em);
+      font-size: var(--ft-se-300);
+      font-family: var(--ft-fy-1);
+      background-color: var(--bd-cr, var(--white-2));
+    }
+
+    .primary-button:hover {
+      background-color: var(--white-1);
+    }
+  </style>
+</head>
+
+<body class="page">
+  <main class="page__main">
+    <div class="content page__content">
+      <div class="content__text-block">
+        <h1 class="content__title">{{ title }}</h1>
+        <p class="content__desc" data-is-hidden-content="true">{{text}}</span></p>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

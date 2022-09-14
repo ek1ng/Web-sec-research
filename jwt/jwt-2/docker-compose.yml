@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  jwt2-app:
+    build:
+      context: .
+      dockerfile: flask.Dockerfile
+    ports:
+      - "9091:9090"
