@@ -1,0 +1,23 @@
+version: '1.0'
+services:
+  challenge07_mysql:
+    image: mysql:8.0.26
+    user: mysql:mysql
+    command: --default-authentication-plugin=mysql_native_password --max-connections=2048
+    environment:
+      MYSQL_ROOT_PASSWORD: "kQzJV7NLnUuqWLyi9vrPeypAA3iHd595"
+      MYSQL_USER: "book"
+      MYSQL_PASSWORD: "Bl09m4Nag3rPa5sWOrd"
+      MYSQL_DATABASE: "book"
+    volumes: 
+      - ./database:/docker-entrypoint-initdb.d/
+    ports:
+      - "3307:3306"
+
+  web:
+    container_name: "challenge07"
+    build: .
+    links:
+      - challenge07_mysql
+    ports:
+      - "10041:80"
