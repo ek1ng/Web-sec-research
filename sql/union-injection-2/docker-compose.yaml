@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-coco
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: coco
+      MYSQL_PASSWORD: L-Zx1Eq!
+    ports:
+      - "6606:3306"
+    volumes:
+      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    ports:
+      - "3000:3000"
