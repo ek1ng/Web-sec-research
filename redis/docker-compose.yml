@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  redis_demo:
+    build: .
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+      - "6022:22"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=1
