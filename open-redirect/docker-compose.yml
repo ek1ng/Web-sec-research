@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  oauth:
+    build: ./oauth
+    ports:
+      - "9090:9090"
+  app:
+    build: ./app
+    ports:
+      - "8090:8090"
