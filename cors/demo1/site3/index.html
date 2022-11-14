@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <label for="input">URL: </label>
+    <input type="text" id="input" name="input">
+    <button id="submit">send</button>
+  </div>
+  <code id="code">
+  </code>
+  <code id="resp">
+  </code>
+  <script>
+    const btn = document.getElementById("submit")
+    const input = document.getElementById("input")
+    btn.addEventListener("click", e => {
+      e.preventDefault()
+      const url = input.value
+      const xhr = new XMLHttpRequest()
+      xhr.open("POST", url)
+      xhr.setRequestHeader("Conntent-Type", "application/json")
+      xhr.onload = response => {
+        const headers = response.getAllResponseHeaders()
+        console.log(headers)
+      }
+      xhr.onerror = error => {
+        console.log(error)
+        const headers = error.getAllResponseHeaders()
+        console.log(headers)
+      }
+      xhr.send(JSON.stringify({ msg: "test" }))
+    })
+  </script>
+</body>
+
+</html>

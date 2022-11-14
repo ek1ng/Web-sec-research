@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OAuth Login</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"
+    integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <div class="login-box">
+    <h2>OAuth Login</h2>
+    <form action="/login" method="POST">
+      <div class="user-box">
+        <input type="text" name="username" required="">
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="">
+        <label>Password</label>
+      </div>
+      <a href="#" id="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </a>
+    </form>
+  </div>
+  <!-- partial -->
+  <script>
+    const urlParams = new URLSearchParams(window.location.search)
+    const callback = urlParams.get("callback")
+    document.forms[0].action = "/login?callback=" + callback
+
+    const submit = document.getElementById("submit")
+    submit.addEventListener("click", e => {
+      document.forms[0].submit()
+    })
+  </script>
+</body>
+
+</html>

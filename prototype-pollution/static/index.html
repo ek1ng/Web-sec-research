@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <textarea name="json" id="json" cols="30" rows="5" value=""></textarea>
+    <br>
+    <button id="view">view</button>
+  </div>
+  <div id="container">
+
+  </div>
+  <script>
+    const input = document.getElementById("json")
+    const container = document.getElementById("container")
+    const button = document.getElementById("view")
+    input.value = '{"username":"aaa","blog":"https://www.baidu.com"}'
+    function send() {
+      const xhr = new XMLHttpRequest()
+      xhr.open("POST", "/render")
+      xhr.setRequestHeader("content-type", "application/json")
+      xhr.onload = e => {
+        container.innerHTML = xhr.responseText
+      }
+      xhr.send(input.value)
+    }
+    view.addEventListener("click", send)
+  </script>
+</body>
+
+</html>
